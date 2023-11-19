@@ -1,0 +1,6 @@
+module b ( input c , output d ) ; 
+always @ ( posedge clk or negedge reset )
+begin
+b = 3 ; 
+end
+endmodule

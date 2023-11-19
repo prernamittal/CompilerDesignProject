@@ -1,0 +1,6 @@
+module b ( input c , output d ) ; 
+always @ ( * )
+begin
+b = 3 ; 
+end
+endmodule

@@ -1,0 +1,9 @@
+module b ( input c , output d ) ; 
+always @ ( * )
+begin
+if ( b + c )
+begin
+a = 3 ;
+end
+end
+endmodule

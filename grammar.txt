@@ -1,0 +1,33 @@
+Program → ModuleDefinition 
+ModuleDefinition → module id ( PortList ) ; ModuleItems endmodule
+PortList → ε | PortDeclaration , PortList
+PortDeclaration → InputDeclaration | OutputDeclaration | InoutDeclaration 
+InputDeclaration → input id | input [ num : num ] id
+OutputDeclaration → output id| output [ num : num ] id | output reg id| output 
+reg [ num : num ] id
+InoutDeclaration → inout id | inout [num : num] id
+ModuleItems → ModuleItem ModuleItems | ε
+ModuleItem → AlwaysBlock | InitialBlock | WireDeclaration 
+AlwaysBlock → always @ ( Sensitivity ) begin StatementList end
+StatementList → Statement StatementList | ε
+Sensitivity → * | SensitivityExpression SensitivityList
+SensitivityList → or SensitivityExpression SensitivityList | ε
+SensitivityExpression → PosedgeSignal | NegedgeSignal | id 
+PosedgeSignal → posedge id
+NegedgeSignal → negedge id 
+InitialBlock → initial begin StatementList end
+WireDeclaration → wire NetIdentifierList ;
+NetIdentifierList → id , NetIdentifierList | id 
+Statement → AssignmentStatement | IfStatement 
+AssignmentStatement → id = Expression ;
+Expression → BitExpression | ArithExpression | RelExpression | 
+(Expression) | Factor
+Factor → id | num
+BitExpression → Factor BitOp Factor | ~ Factor
+BitOp → & | | | ^
+ArithExpression → Factor ArithOp Factor
+ArithOp → + | - | * | /
+RelExpression → Factor RelOp Factor
+RelOp → > | >= | < | <= | == | !=
+IfStatement → if ( Expression ) begin StatementList end elseStatement
+elseStatement → else begin StatementList end | ε
